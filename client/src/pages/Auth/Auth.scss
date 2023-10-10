@@ -1,0 +1,191 @@
+.Auth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 4rem;
+    position: relative;
+    overflow: auto;
+
+    > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+
+        > div {
+            flex-direction: row;
+        }
+    }
+
+    @media (max-width: 766px) {
+        gap: 2rem;
+    }
+}
+
+/* left side */
+.a-left {
+    gap: 2rem;
+
+    > img {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .Webname {
+        > h1 {
+            font-size: 3rem;
+            background-color: red;
+
+            /* Create the gradient. */
+            background-image: var(--buttonBg);
+
+            /* Set the background size and repeat properties. */
+            background-size: 100%;
+            background-repeat: repeat;
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-background-clip: text;
+            -moz-text-fill-color: transparent;
+        }
+
+        > h6 {
+            font-size: 0.85rem;
+        }
+    }
+
+    @media (min-width: 768px) {
+        gap: 4rem;
+    }
+}
+
+.signup {
+    @media (max-width: 766px) {
+        padding-bottom: 5rem;
+    }
+}
+
+.infoForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.1rem;
+    width: 100%;
+
+    .infoInput {
+        border: none;
+        outline: none;
+        background-color: var(--inputColor); // You can define this variable as well
+        border-radius: 8px;
+        padding: 13px;
+        flex: 1;
+        width: 100% !important;
+    }
+
+    > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+
+        .infoButton {
+            width: 100%;
+            max-width: 6rem;
+            height: 2rem;
+            align-self: flex-end;
+        }
+    }
+
+    @media (min-width: 768px) {
+        width: auto;
+
+        .infoInput {
+            width: auto;
+        }
+
+        > div {
+            flex-direction: row;
+            align-items: center;
+
+            .infoButton {
+                width: 6rem;
+                max-width: none;
+            }
+        }
+    }
+}
+
+.authForm {
+    background-color: var(--cardColor);
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 100%;
+
+    > div {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+        min-width: 350px;
+    }
+    @media (max-width: 767px) {
+        min-width: 300px;
+    }
+}
+
+
+.App {
+    overflow: hidden;
+    color: var(--black);
+    background: #f3f3f3;
+}
+
+.blur {
+    position: absolute;
+    width: 22rem;
+    height: 14rem;
+    border-radius: 50%;
+    background: #a6ddf0;
+    filter: blur(72px);
+}
+
+@mixin button-styles {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    background: var(--buttonBg);
+    transition: all 100ms ease-out;
+
+    &:hover {
+        cursor: pointer;
+        color: var(--orange);
+        background: transparent;
+        border: 2px solid var(--orange);
+    }
+}
+
+.button:disabled {
+    background: silver;
+    pointer-events: none;
+}
+
+.button {
+    @include button-styles;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

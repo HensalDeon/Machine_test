@@ -1,0 +1,82 @@
+$gradient-color-1: #ff6600;
+$gradient-color-2: #ff3399;
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: linear-gradient(98.63deg, #f9a225 0%, #f95f35 100%);
+    background-color: #131313;
+    border-radius: 0.8rem !important;
+    hr {
+        color: #f95f35;
+    }
+    span {
+        cursor: pointer;
+    }
+}
+
+.modal-dialog {
+    width: 14rem !important;
+    border-radius: 0.8rem !important;
+    margin-top: 17% !important;
+    display: flex;
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    align-items: center !important;
+}
+
+.modal-content {
+    border-radius: 1rem !important;
+    width: auto !important;
+}
+
+@mixin text-gradient($color-1, $color-2) {
+    background-image: linear-gradient(to right, $color-1, $color-2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.linear-gradient-text {
+    @include text-gradient(#ff6600, #ff3399);
+    padding: 0 3rem;
+}
+
+.lg-text {
+    @include text-gradient(#ff6600, #ff3399);
+}
+
+.Search {
+    display: flex !important;
+    background-color: rgb(210, 210, 210) !important;
+    border-radius: 10px !important;
+    padding: 5px !important;
+    justify-content: space-between;
+    align-items: center;
+
+    > input {
+        background-color: transparent !important;
+        border: none !important;
+        outline: none !important;
+    }
+
+    > textarea {
+        border: none !important;
+        outline: none !important;
+    }
+}
+
+.cover{
+    display: flex;
+    justify-content: space-between;
+    padding: 1 1rem ;
+
+    .modalButton {
+        width: 100%;
+        max-width: 3rem;
+        height: 2rem;
+        align-self: flex-end;
+    }
+}
