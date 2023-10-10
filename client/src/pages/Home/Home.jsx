@@ -30,7 +30,7 @@ function Home() {
     };
 
     const handleDownload = () => {
-        downloadBlog()
+        downloadBlog();
     };
     return (
         <main>
@@ -52,11 +52,11 @@ function Home() {
                 <button className="button infoButton" onClick={handleShow}>
                     Create Blog
                 </button>
-                <button className="button " onClick={handleDownload}>
+                <button className="button" onClick={handleDownload}>
                     Dwonload blog
                 </button>
                 <form action="/upload" method="POST" encType="multipart/form-data">
-                    <div>
+                    <div style={{ display: "flex" }}>
                         <input type="file" name="csvFile" accept=".csv" required />
                         <button type="submit csv" className="button">
                             Convert and Upload

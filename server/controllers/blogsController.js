@@ -1,6 +1,8 @@
 import BlogModel from "../model/blogModel.js";
-import fs from "fs";
-import csvtojson from "csvtojson";
+import fs from "fs/promises";
+import { fromString } from "csvtojson";
+import path from "path";
+
 import { generateBlogs } from "../config/excel.js";
 
 // Creat new Post
@@ -79,14 +81,12 @@ export const getAllBlogs = async (req, res) => {
 export const blogDownload = async (req, res) => {
     try {
         const blogs = await BlogModel.find();
-        console.log(blogs, "/1213");
-        res.setHeader("Cache-Control", "no-store");
-        res.setHeader("Pragma", "no-cache");
+
         const workbook = await generateBlogs(blogs);
+
         res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         res.setHeader("Content-Disposition", "attachment; filename=blogs.xlsx");
         await workbook.xlsx.write(res);
-
         res.end();
     } catch (error) {
         console.error(error);
@@ -94,30 +94,19 @@ export const blogDownload = async (req, res) => {
     }
 };
 
-//upload a csv
+//csv to json
 export const csvToJson = async (req, res) => {
+    const csvData = req.file.buffer.toString("utf8");
+
     try {
-        if (!req.file) {
-            return res.status(400).json({ error: "No file uploaded" });
-        }
-        const csvData = req.file.buffer.toString("utf8");
+        const jsonArray = await fromString(csvData);
+        const jsonFile = JSON.stringify(jsonArray, null, 2);
+        const filePath = path.join(__dirname, "output.json");
 
-        csvtojson()
-            .fromString(csvData)
-            .then((jsonArray) => {
-                const jsonFileName = "data.json";
-                const jsonFilePath = `${__dirname}/../${jsonFileName}`;
+        await fs.writeFile(filePath, jsonFile);
 
-                fs.writeFileSync(jsonFilePath, JSON.stringify(jsonArray), "utf-8");
-
-                res.status(200).json({ message: "CSV converted and saved as JSON" });
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                res.status(500).json({ error: "Internal server error" });
-            });
+        res.json({ message: "CSV file converted to JSON and saved as output.json" });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({ error: "Error converting CSV to JSON" });
     }
 };
